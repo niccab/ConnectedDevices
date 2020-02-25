@@ -1,3 +1,13 @@
+/* 
+ *  Nicole Cabalquinto
+ *  Connected Devices: Hue Light Controller
+ *  February 25, 2020
+ *  
+ *  Modified "HueBlinkWithJsonEncoder.ino"
+ *  https://github.com/tigoe/hue-control/blob/master/ArduinoExamples/HueBlinkWithJsonEncoder/HueBlinkWithJsonEncoder.ino
+ *  
+ */
+
 #include <SPI.h>
 #include <WiFiNINA.h>
 #include <ArduinoHttpClient.h>
@@ -15,11 +25,9 @@
 // initialize display
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-
 int status = WL_IDLE_STATUS;      // the Wifi radio's status
 char hueHubIP[] = "172.22.151.181";  // IP address of the HUE bridge
 String hueUserName = "EVVzNhLeRPzX9Rnd4DmyoHq5t0eFI6RbN0zV6EQ9"; // hue bridge username
-
 
 // make a wifi instance and a HttpClient instance:
 WiFiClient wifi;
@@ -27,7 +35,6 @@ HttpClient httpClient = HttpClient(wifi, hueHubIP);
 
 char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS;
-
 
 // a JSON object to hold the light state:
 JSONVar lightState;
@@ -55,15 +62,9 @@ void setup() {
     delay(100);
   }
 
-
-
   pinMode(ledPin, OUTPUT);
 
-
   while (!Serial);
-
-
-
 
   //   attempt to connect to Wifi network:
   while ( WiFi.status() != WL_CONNECTED) {
@@ -137,12 +138,6 @@ void loop() {
     // save the current button state for next time:
     lastSendButtonState = sendButtonState;
   }
-
-
-
-
-
-
 }
 
 void sendRequest(int light, JSONVar myState) {
@@ -218,11 +213,7 @@ void changeLightProperty(int whichProperty, int change) {
   reading += "\nValue: ";
   reading += String(newVal);
   displayWrite(reading);
-
-
-
 }
-
 
 void displayWrite(String message) {
   display.clearDisplay();
